@@ -1,0 +1,636 @@
+kturtle-script-v1.0
+# Project - Chess made in KTurtle
+# Branch - Master
+# Filename - /chess.turtle
+# Author - uKAhinoto
+# Last Modified - 10/10/24
+
+# Divides $x by $y, then floors the result
+@(learn) floordiv $x@(,) $y {
+  $val = @(round)($x / $y)
+  @(if) ((@(mod) $x@(,) $y) >= ($y/2)) {
+    $val = $val - 1
+  }
+  @(return) $val
+}
+
+# Gets the peice value located at the given grid location
+@(learn) GetGrid $x {
+  @(if) ($x == -1) { @(return) 0 }
+
+  @(if) @(not) ( $x >= 0 @(and) $x <= 63 ) { @(message) $x }
+  @(assert) ( $x >= 0 @(and) $x <= 63 )
+  @(if) ($x==00) { @(return) $gridA8 } @(if) ($x==01) { @(return) $gridB8 } @(if) ($x==02) { @(return) $gridC8 } @(if) ($x==03) { @(return) $gridD8 }
+  @(if) ($x==04) { @(return) $gridE8 } @(if) ($x==05) { @(return) $gridF8 } @(if) ($x==06) { @(return) $gridG8 } @(if) ($x==07) { @(return) $gridH8 }
+  @(if) ($x==08) { @(return) $gridA7 } @(if) ($x==09) { @(return) $gridB7 } @(if) ($x==10) { @(return) $gridC7 } @(if) ($x==11) { @(return) $gridD7 }
+  @(if) ($x==12) { @(return) $gridE7 } @(if) ($x==13) { @(return) $gridF7 } @(if) ($x==14) { @(return) $gridG7 } @(if) ($x==15) { @(return) $gridH7 }
+  @(if) ($x==16) { @(return) $gridA6 } @(if) ($x==17) { @(return) $gridB6 } @(if) ($x==18) { @(return) $gridC6 } @(if) ($x==19) { @(return) $gridD6 }
+  @(if) ($x==20) { @(return) $gridE6 } @(if) ($x==21) { @(return) $gridF6 } @(if) ($x==22) { @(return) $gridG6 } @(if) ($x==23) { @(return) $gridH6 }
+  @(if) ($x==24) { @(return) $gridA5 } @(if) ($x==25) { @(return) $gridB5 } @(if) ($x==26) { @(return) $gridC5 } @(if) ($x==27) { @(return) $gridD5 }
+  @(if) ($x==28) { @(return) $gridE5 } @(if) ($x==29) { @(return) $gridF5 } @(if) ($x==30) { @(return) $gridG5 } @(if) ($x==31) { @(return) $gridH5 }
+  @(if) ($x==32) { @(return) $gridA4 } @(if) ($x==33) { @(return) $gridB4 } @(if) ($x==34) { @(return) $gridC4 } @(if) ($x==35) { @(return) $gridD4 }
+  @(if) ($x==36) { @(return) $gridE4 } @(if) ($x==37) { @(return) $gridF4 } @(if) ($x==38) { @(return) $gridG4 } @(if) ($x==39) { @(return) $gridH4 }
+  @(if) ($x==40) { @(return) $gridA3 } @(if) ($x==41) { @(return) $gridB3 } @(if) ($x==42) { @(return) $gridC3 } @(if) ($x==43) { @(return) $gridD3 }
+  @(if) ($x==44) { @(return) $gridE3 } @(if) ($x==45) { @(return) $gridF3 } @(if) ($x==46) { @(return) $gridG3 } @(if) ($x==47) { @(return) $gridH3 }
+  @(if) ($x==48) { @(return) $gridA2 } @(if) ($x==49) { @(return) $gridB2 } @(if) ($x==50) { @(return) $gridC2 } @(if) ($x==51) { @(return) $gridD2 }
+  @(if) ($x==52) { @(return) $gridE2 } @(if) ($x==53) { @(return) $gridF2 } @(if) ($x==54) { @(return) $gridG2 } @(if) ($x==55) { @(return) $gridH2 }
+  @(if) ($x==56) { @(return) $gridA1 } @(if) ($x==57) { @(return) $gridB1 } @(if) ($x==58) { @(return) $gridC1 } @(if) ($x==59) { @(return) $gridD1 }
+  @(if) ($x==60) { @(return) $gridE1 } @(if) ($x==61) { @(return) $gridF1 } @(if) ($x==62) { @(return) $gridG1 } @(if) ($x==63) { @(return) $gridH1 }
+}
+
+# Sets the piece value located at the given grid location
+@(learn) SetGrid $x@(,) $v {
+  @(assert) ( $x >= 0 @(and) $x <= 63 )
+  @(assert) ( $v >= 0 @(and) $v <= 12 )
+
+  @(if) ($x==00) { $gridA8 = $v } @(if) ($x==01) { $gridB8 = $v } @(if) ($x==02) { $gridC8 = $v } @(if) ($x==03) { $gridD8 = $v }
+  @(if) ($x==04) { $gridE8 = $v } @(if) ($x==05) { $gridF8 = $v } @(if) ($x==06) { $gridG8 = $v } @(if) ($x==07) { $gridH8 = $v }
+  @(if) ($x==08) { $gridA7 = $v } @(if) ($x==09) { $gridB7 = $v } @(if) ($x==10) { $gridC7 = $v } @(if) ($x==11) { $gridD7 = $v }
+  @(if) ($x==12) { $gridE7 = $v } @(if) ($x==13) { $gridF7 = $v } @(if) ($x==14) { $gridG7 = $v } @(if) ($x==15) { $gridH7 = $v }
+  @(if) ($x==16) { $gridA6 = $v } @(if) ($x==17) { $gridB6 = $v } @(if) ($x==18) { $gridC6 = $v } @(if) ($x==19) { $gridD6 = $v }
+  @(if) ($x==20) { $gridE6 = $v } @(if) ($x==21) { $gridF6 = $v } @(if) ($x==22) { $gridG6 = $v } @(if) ($x==23) { $gridH6 = $v }
+  @(if) ($x==24) { $gridA5 = $v } @(if) ($x==25) { $gridB5 = $v } @(if) ($x==26) { $gridC5 = $v } @(if) ($x==27) { $gridD5 = $v }
+  @(if) ($x==28) { $gridE5 = $v } @(if) ($x==29) { $gridF5 = $v } @(if) ($x==30) { $gridG5 = $v } @(if) ($x==31) { $gridH5 = $v }
+  @(if) ($x==32) { $gridA4 = $v } @(if) ($x==33) { $gridB4 = $v } @(if) ($x==34) { $gridC4 = $v } @(if) ($x==35) { $gridD4 = $v }
+  @(if) ($x==36) { $gridE4 = $v } @(if) ($x==37) { $gridF4 = $v } @(if) ($x==38) { $gridG4 = $v } @(if) ($x==39) { $gridH4 = $v }
+  @(if) ($x==40) { $gridA3 = $v } @(if) ($x==41) { $gridB3 = $v } @(if) ($x==42) { $gridC3 = $v } @(if) ($x==43) { $gridD3 = $v }
+  @(if) ($x==44) { $gridE3 = $v } @(if) ($x==45) { $gridF3 = $v } @(if) ($x==46) { $gridG3 = $v } @(if) ($x==47) { $gridH3 = $v }
+  @(if) ($x==48) { $gridA2 = $v } @(if) ($x==49) { $gridB2 = $v } @(if) ($x==50) { $gridC2 = $v } @(if) ($x==51) { $gridD2 = $v }
+  @(if) ($x==52) { $gridE2 = $v } @(if) ($x==53) { $gridF2 = $v } @(if) ($x==54) { $gridG2 = $v } @(if) ($x==55) { $gridH2 = $v }
+  @(if) ($x==56) { $gridA1 = $v } @(if) ($x==57) { $gridB1 = $v } @(if) ($x==58) { $gridC1 = $v } @(if) ($x==59) { $gridD1 = $v }
+  @(if) ($x==60) { $gridE1 = $v } @(if) ($x==61) { $gridF1 = $v } @(if) ($x==62) { $gridG1 = $v } @(if) ($x==63) { $gridH1 = $v }
+
+  # Update the grid's display
+  @(pw) 50 @(dir) 0
+  @(if) ( (@(mod) $x@(,) 2)==(@(round) ((@(mod) $x@(,) 16)/16)) ) { @(pc) 242@(,) 225@(,) 195 } @(else) { @(pc) 195@(,) 160@(,) 130 }
+  @(go) (@(mod) $x@(,) 8)*50+25@(,) (floordiv $x@(,) 8)*50+25
+  @(fw) 0.001
+
+  @(if) ( $v != 0 ) {
+    @(fontsize) 25
+    @(go) (@(mod) $x@(,) 8)*50+13@(,) (floordiv $x@(,) 8)*50+3
+    @(if) ( (@(mod) $v@(,) 2) != 1 ) { @(pc) 0@(,) 0@(,) 0 } @(else) { @(pc) 255@(,) 255@(,) 255 }
+    $gridval = ( floordiv $v+1@(,) 2)
+    @(assert) (($gridval >= 1) @(and) ($gridval <= 6))
+    @(if) ( $gridval == 1 ) { @(go) (@(mod) $x@(,) 8)*50@(,) (floordiv $x@(,) 8)*50 DrawPiece 0 }
+    @(else) @(if) ( $gridval == 2 ) { @(go) (@(mod) $x@(,) 8)*50@(,) (floordiv $x@(,) 8)*50 DrawPiece 1 }
+    @(else) @(if) ( $gridval == 3 ) { @(go) (@(mod) $x@(,) 8)*50@(,) (floordiv $x@(,) 8)*50 DrawPiece 2 }
+    @(else) @(if) ( $gridval == 4 ) { @(go) (@(mod) $x@(,) 8)*50@(,) (floordiv $x@(,) 8)*50 DrawPiece 3 }
+
+
+    @(else) @(if) ( $gridval == 5 ) { @(print) "Q" }
+    @(else) @(if) ( $gridval == 6 ) { @(print) "K" }
+  }
+  @(fontsize) 7
+  @(pc) 128@(,) 128@(,) 128
+  @(go) (@(mod) $x@(,) 8)*50-3@(,) (floordiv $x@(,) 8)*50-5
+  @(print) (InverseParse $x)
+}
+
+
+
+@(learn) DrawPiece $type {
+  @(if) ( $type < 0 ) { @(return) }
+  @(if) ( $type > 6 ) { @(return) }
+  @(pw) 2
+  @(dir) 0
+
+  $x = @(getx)
+  $y = @(gety)
+
+  @(if) ( $type == 0 ) { # Pawn
+    $x = $x + 25
+    $y = $y + 45
+
+    $d = 1
+    @(repeat)  2 {
+      @(go) $x@(,) $y
+      @(dir) 90 * $d
+      @(fw) 13
+      @(tl) 90 * $d
+      @(for) $i=20 @(to) 0 @(step)-1 {
+        @(fw) $i / 10
+        @(tl) 3 * $d
+      }
+      @(tr) 100 * $d
+      @(repeat) 12 {
+        @(fw) 1
+        @(tl) 10 * $d
+      }
+      @(tr) 120 * $d
+      @(repeat) 9 {
+        @(fw) 1.3
+        @(tl) 15 * $d
+      }
+      $d = -1
+    }
+  } @(else) @(if) ( $type == 1 ) { # Horse
+    $x = $x + 13
+    $y = $y + 45
+
+    @(go) $x@(,) $y
+    @(dir) 90
+    @(fw) 31.75
+    @(tl) 90
+    @(for) $i=20 @(to) 0 @(step)-1 {
+      @(fw) $i/5
+      @(tl) 4
+    }
+    @(tr) 45
+    @(fw) 6
+    @(tl) 120
+    @(fw) 5
+    @(dir) -90
+    @(fw) 5
+    @(tr) 45
+    @(fw) 5
+    @(tl) 90+45
+    @(fw) 3.5
+    @(tr) 30
+    @(fw) 17
+
+    @(repeat) 8 {
+      @(fw) 1.2
+      @(tl) 18
+    }
+    @(tr) 90
+    @(repeat) 7 {
+      @(fw) 0.4
+      @(tl) 18
+    }
+    @(tr) 15
+    @(fw) 15
+    @(pu) @(bw) 4 @(pd)
+    @(dir) 180
+    @(fw) 9
+    @(repeat) 7  {
+      @(fw) 1
+      @(tr) 8
+    }
+    @(repeat) 8 {
+      @(fw) 1
+      @(tl) 8
+    }
+    @(go) $x@(,) $y-27
+    @(dir) 40
+    @(fw) 5
+
+    @(go) $x-5@(,) $y-20
+  } @(else) @(if) ( $type == 2 ) { # Bishop
+    $x = $x + 25
+    $y = $y + 7
+    @(go) $x@(,) $y
+    @(dir) 90
+    @(pu) @(bw) 0.5 @(pd)
+    @(repeat) 20 {
+      @(fw) 1
+      @(tr) 18
+    }
+
+    $d = 1
+    @(repeat) 2 {
+      @(tr) 90 * $d
+      @(go) $x+(2 * $d)@(,) $y+7
+      @(dir) 180-(45 * $d)
+      @(for) $i=0 @(to) 15 {
+        @(fw) 1
+        @(tr) $i * $d
+      }
+
+      @(tr) 15 * $d
+      @(fw) 4
+      @(pu) @(bw) 4 @(pd)
+      @(tl) 15 * $d
+
+      @(tl) (90+30) * $d
+      @(for) $i=0 @(to) 9 {
+        @(fw) 1.5
+
+        @(if) ( $i == 4 ) {
+          @(tr) 117 * $d
+          @(fw) 10 @(pu) @(bw) 10 @(pd)
+          @(tl) 117 * $d
+        }
+
+        @(tr) $i*3 * $d
+      }
+
+      @(fw) 13/2
+      @(tr) 180+(20 * $d)
+      @(fw) 10
+      $d = -1
+    }
+
+    # Cross
+    @(dir) 90
+    @(go) $x@(,) $y+12
+    @(tr) 90
+    @(fw) 4
+    @(pu) @(bw) 2
+    @(tr) 90 @(bw) 2 @(pd)
+    @(fw) 4
+  } @(else) @(if) ( $type == 3 ) { # Rook
+    @(go) @(getx) + 5@(,) @(gety) + 9
+    # Ridges
+    @(fw) 4
+    @(for) $i=0 @(to) 4 {
+      @(fw) 2 @(tr) 90 * ((@(mod) $i@(,) 2) - 0.5) * -2
+      @(fw) 8 @(tr) 90 * ((@(mod) $i@(,) 2) - 0.5) * -2
+    }
+
+    @(fw) 6
+    @(tr) 45
+    @(fw) 4 * @(sqrt) 2
+
+    @(tr) 45
+    @(fw) 32
+    @(pu) @(bw) 32 @(pd)
+    @(tl) 45
+
+    @(tl) 45
+    @(fw) 20
+
+    @(tr) 90
+    @(fw) 32
+    @(pu) @(bw) 32 @(pd)
+    @(tl) 90
+
+    @(tl) 45
+    @(fw) 4
+    @(tr) 45
+    @(fw) 5
+    @(tl) 90
+
+    @(pu) @(fw) 6 - (4 / @(sqrt) 2) @(bw) 44 @(pd)
+    @(fw) 44
+
+    @(tr) 90
+    @(fw) 6
+    @(tr) 90
+    @(fw) 44
+    @(tr) 90
+    @(fw) 6
+    @(tr) 90
+    @(pu) @(fw) 6 - (4 / @(sqrt) 2) @(pd)
+
+    @(tl) 90
+    @(fw) 5
+    @(tr) 90
+    @(fw) 32 + (8 / @(sqrt) 2)
+    @(pu) @(bw) 32 + (8 / @(sqrt) 2) @(pd)
+    @(tl) 90
+
+    @(tr) 45
+    @(fw) 4
+    @(tl) 45
+    @(fw) 20
+    @(tl) 45
+    @(fw) 4 * @(sqrt) 2
+    @(tr) 45 + 90
+    @(fw) 40
+  }
+  
+  @(dir) 0
+}
+
+
+# Checks if the given move is legal for a given peice
+@(learn) LegalMove $piece@(,) $old@(,) $new {
+  @(if) ($new==-2) { @(return) @(true) }
+  @(if) ( $new == $old ) { @(return) @(false) }
+
+  #assertions
+  @(assert) ( ($piece > 0) @(and) ($piece <= 12) )
+  @(assert) ( (GetGrid $old) == $piece )
+  @(if) @(not) ( ($new >= 0) @(and) ($new <= 63) ) { @(return) @(false) }
+
+  # Set Vars
+  $col = ( (@(mod) $piece@(,) 2)==0 ) # False = White; True = Black
+  $type = (floordiv $piece-1@(,) 2) # PNBRQK
+
+  $ofile = (@(mod) $old@(,) 8) # Old File
+  $orank = 8-(floordiv $old@(,) 8) # Old Rank
+  $nfile = (@(mod) $new@(,) 8) # New File
+  $nrank = 8-(floordiv $new@(,) 8) # New Rank
+
+  # Switch on piece type
+  @(if) ( $type == 0 ) { # Pawn
+    @(if) ((@(mod) ($ofile - $nfile)@(,) 2) > 1) { @(return) @(false) } # File is too left/right
+
+    @(if) ( ($ofile - $nfile) == 0 ) {
+      @(if) ( $col ) { @(return) ( ($orank - $nrank) == 1) @(or) ( ($orank == 7) @(and) ($nrank == 5) ) } # Black
+      @(else) { @(return) ( ($nrank - $orank) == 1) @(or) ( ($orank == 2) @(and) ($nrank == 4) ) } # White
+    } @(else) { # Captures
+      $other = GetGrid $new
+      @(if) ($col) { # Black
+        @(if) ( ($orank-$nrank) != 1 ) { @(return) @(false) }
+        @(if) ( ((@(mod) $other@(,) 2)!=(@(mod) $piece@(,) 2)) @(and) ($other != 0) ) { @(return) @(true) }
+      } @(else) {
+        @(if) ( ($nrank-$orank) != 1 ) { @(return) @(false) }
+        @(if) ( ((@(mod) $other@(,) 2)!=(@(mod) $piece@(,) 2)) @(and) ($other != 0) ) { @(return) @(true) }
+      }
+      @(if) ( $other == 0 ) {
+        # Check for en passant
+        @(if) ( ($last_old==-1) @(or) ($last_new==-1) ) { @(return) @(false) }
+        $other2 = GetGrid $last_new # The piece that was moved last turn
+        @(if) ( (floordiv $other2-1@(,) 2)==0 @(and) ( (($last_new-$last_old)==16) @(or) (($last_new-$last_old)==-16) ) ) { # Piece was a pawn and moved twice
+          SetGrid $last_new@(,) 0
+          @(return) @(true)
+        }
+      }
+      @(return) @(false)
+    }
+  } @(else) @(if) ( $type == 1 ) { # Knight
+    $other = GetGrid $new
+    @(if) ( ($other != 0) @(and) (((@(mod) $other@(,) 2)==0) == $col) ) { @(return) @(false) } # Target is a piece of the same color
+    # Movement offsets: 17, 15, 10, 6 (+ and -)
+
+    @(return) ($new==($old-17)) @(or) ($new==($old-15)) @(or) ($new==($old-10)) @(or) ($new==($old-6)) @(or) ($new==($old+6)) @(or) ($new==($old+10)) @(or) ($new==($old+15)) @(or) ($new==($old+17))
+  } @(else) @(if) ( $type == 2 ) { # Bishop
+    @(if) ( (@(mod) $new@(,) 2) != (@(mod) $old@(,) 2) ) { @(return) @(false) } # Bishop must stay on the same color
+
+    $drank = $nrank - $orank
+    $dfile = $nfile - $ofile
+
+    @(if) @(not) ( ($drank == $dfile) @(or) ($drank == ($dfile*-1)) ) { @(return) @(false) } # Must be diagonal
+    @(if) ( ($drank == $dfile) ) { $dir = 7 }
+    @(else) { $dir = 9 }
+
+    @(if) ( $orank < $nrank ) { $dir = $dir * -1 } # Going up so dir needs to be negative
+    $breakval = @(true)
+    @(for) $i=($old+$dir) @(to) $new @(step) $dir {
+      @(if) ( $i==$new ) {
+        $other = GetGrid $new
+        $breakval = ( ($other == 0) @(or) ( (@(mod) $other@(,) 2) != (@(mod) $piece@(,) 2) ) )
+      } @(else) {
+        @(if) ( (GetGrid $i) != 0 ) { $breakval = @(false) @(break) }
+      }
+    }
+    @(return) $breakval
+  } @(else) @(if) ( $type == 3 ) { # Rook
+    @(if) (($ofile-$nfile)!=0) == (($orank-$nrank)!=0) { @(return) @(false) } # Only moves 1 direction at a time
+    $other = GetGrid $new
+    @(if) ( ($other != 0) @(and) (((@(mod) $other@(,) 2)==0) == $col) ) { @(return) @(false) } # Target is a piece of the same color
+
+    $breakval = @(true)
+    @(if) ( ($ofile-$nfile)!=0 ) { # Horozontal Movement
+      @(if) (($ofile-$nfile)>0) { $dir = -1 } @(else) { $dir = 1 }
+      @(if) (($ofile-$nfile)==1) { $dir = 1 }
+    } @(else) { # Vertical Movement
+      @(if) (($orank-$nrank)>0) { $dir = 8 } @(else) { $dir = -8 }
+      @(if) (($orank-$nrank)==-1) { $dir = 8 }
+    }
+    @(for) $i=($old+$dir) @(to) ($new-$dir) @(step) $dir { @(if) ( ((GetGrid $i) != 0) ) { $breakval = @(false) @(break) } }
+    @(return) $breakval
+  } @(else) @(if) ( $type == 4 ) { # Queen
+    $drank = $nrank - $orank
+    $dfile = $nfile - $ofile
+
+    $breakval = @(true)
+
+    # Switch between rook and bishop movement
+    @(if) ( ($drank==0) @(or) ($dfile==0) ) { # Rook movement
+      @(if) ( ($ofile-$nfile)!=0 ) { # Horozontal Movement
+        @(if) (($ofile-$nfile)>0) { $dir = -1 } @(else) { $dir = 1 }
+        @(if) (($ofile-$nfile)==1) { $dir = 1 }
+      } @(else) { # Vertical Movement
+        @(if) (($orank-$nrank)>0) { $dir = 8 } @(else) { $dir = -8 }
+        @(if) (($orank-$nrank)==-1) { $dir = 8 }
+      }
+    } @(else) {
+      @(if) ( (@(mod) $new@(,) 2) != (@(mod) $old@(,) 2) ) { @(return) @(false) } # Diagonal queen must stay on the same color
+      
+      @(if) @(not) ( ($drank == $dfile) @(or) ($drank == ($dfile*-1)) ) { @(return) @(false) } # Must be diagonal
+      @(if) ( ($drank == $dfile) ) { $dir = 7 }
+      @(else) { $dir = 9 }
+
+      @(if) ( $orank < $nrank ) { $dir = $dir * -1 } # Going up so dir needs to be negative
+    }
+    @(for) $i=($old+$dir) @(to) $new @(step) $dir {
+      @(if) ( $i==$new ) {
+        $other = GetGrid $new
+        $breakval = ( ($other == 0) @(or) ( (@(mod) $other@(,) 2) != (@(mod) $piece@(,) 2) ) )
+      } @(else) {
+        @(if) ( (GetGrid $i) != 0 ) { $breakval = @(false) @(break) }
+      }
+    }
+    @(return) $breakval
+  } @(else) @(if) ( $type == 5 ) { # King
+    $drank = $nrank - $orank
+    $dfile = $nfile - $ofile
+
+    @(if) ( (($drank==1) @(or) ($drank==-1)) @(and) (($dfile==1) @(or) ($dfile==-1)) ) {
+
+    } @(else) @(if) ( ($turn @(and) @(not) $black_king_moved) @(or) (@(not) $turn @(and) @(not) $white_king_moved) ) {
+      @(if) ( $turn ) {
+        @(if) ( (@(not) $black_lrook) @(and) ($gridA8==8) @(and) ($new==2) @(and) ($gridB8==0) @(and) ($gridC8==0) @(and) ($gridD8==0) ) {
+          $castling = 1
+          @(return) @(true)
+        }
+        @(if) ( (@(not) $black_rrook) @(and) ($gridH8==8) @(and) ($new==6) @(and) ($gridF8==0) @(and) ($gridG8==0) ) {
+          $castling = 2
+          @(return) @(true)
+        }
+      } @(else) {
+        @(if) ( (@(not) $white_lrook) @(and) ($gridA1==7) @(and) ($new==58) @(and) ($gridB1==0) @(and) ($gridC1==0) @(and) ($gridD1==0) ) {
+          $castling = 1
+          @(return) @(true)
+        }
+        @(if) ( (@(not) $white_rrook) @(and) ($gridH1==7) @(and) ($new==62) @(and) ($gridF1==0) @(and) ($gridG1==0) ) {
+          $castling = 2
+          @(return) @(true)
+        }
+      }
+      @(return) @(false)
+    }
+    $other = GetGrid $new
+
+    @(if) ( ($other==0) @(or) ((@(mod) $other@(,) 2) != (@(mod) $piece@(,) 2)) ) {
+      
+    }
+    @(return) @(false)
+  } @(else) { @(assert) @(false)@(,) "impossible piece type" }
+}
+
+# Convert a square name to square index (i.e. E6 to 20)
+@(learn) Parse $x {
+  @(if) ($x=="cancel") { @(return) -2 } @(if) ($x=="quit") { @(exit) }
+  @(if) ($x=="a1") { @(return) 56 } @(if) ($x=="b1") { @(return) 57 } @(if) ($x=="c1") { @(return) 58 } @(if) ($x=="d1") { @(return) 59 }
+  @(if) ($x=="e1") { @(return) 60 } @(if) ($x=="f1") { @(return) 61 } @(if) ($x=="g1") { @(return) 62 } @(if) ($x=="h1") { @(return) 63 }
+  @(if) ($x=="a2") { @(return) 48 } @(if) ($x=="b2") { @(return) 49 } @(if) ($x=="c2") { @(return) 50 } @(if) ($x=="d2") { @(return) 51 }
+  @(if) ($x=="e2") { @(return) 52 } @(if) ($x=="f2") { @(return) 53 } @(if) ($x=="g2") { @(return) 54 } @(if) ($x=="h2") { @(return) 55 }
+  @(if) ($x=="a3") { @(return) 40 } @(if) ($x=="b3") { @(return) 41 } @(if) ($x=="c3") { @(return) 42 } @(if) ($x=="d3") { @(return) 43 }
+  @(if) ($x=="e3") { @(return) 44 } @(if) ($x=="f3") { @(return) 45 } @(if) ($x=="g3") { @(return) 46 } @(if) ($x=="h3") { @(return) 47 }
+  @(if) ($x=="a4") { @(return) 32 } @(if) ($x=="b4") { @(return) 33 } @(if) ($x=="c4") { @(return) 34 } @(if) ($x=="d4") { @(return) 35 }
+  @(if) ($x=="e4") { @(return) 36 } @(if) ($x=="f4") { @(return) 37 } @(if) ($x=="g4") { @(return) 38 } @(if) ($x=="h4") { @(return) 39 }
+  @(if) ($x=="a5") { @(return) 24 } @(if) ($x=="b5") { @(return) 25 } @(if) ($x=="c5") { @(return) 26 } @(if) ($x=="d5") { @(return) 27 }
+  @(if) ($x=="e5") { @(return) 28 } @(if) ($x=="f5") { @(return) 29 } @(if) ($x=="g5") { @(return) 30 } @(if) ($x=="h5") { @(return) 31 }
+  @(if) ($x=="a6") { @(return) 16 } @(if) ($x=="b6") { @(return) 17 } @(if) ($x=="c6") { @(return) 18 } @(if) ($x=="d6") { @(return) 19 }
+  @(if) ($x=="e6") { @(return) 20 } @(if) ($x=="f6") { @(return) 21 } @(if) ($x=="g6") { @(return) 22 } @(if) ($x=="h6") { @(return) 23 }
+  @(if) ($x=="a7") { @(return) 08 } @(if) ($x=="b7") { @(return) 09 } @(if) ($x=="c7") { @(return) 10 } @(if) ($x=="d7") { @(return) 11 }
+  @(if) ($x=="e7") { @(return) 12 } @(if) ($x=="f7") { @(return) 13 } @(if) ($x=="g7") { @(return) 14 } @(if) ($x=="h7") { @(return) 15 }
+  @(if) ($x=="a8") { @(return) 00 } @(if) ($x=="b8") { @(return) 01 } @(if) ($x=="c8") { @(return) 02 } @(if) ($x=="d8") { @(return) 03 }
+  @(if) ($x=="e8") { @(return) 04 } @(if) ($x=="f8") { @(return) 05 } @(if) ($x=="g8") { @(return) 06 } @(if) ($x=="h8") { @(return) 07 }
+  @(return) -1 # Tile not valid
+}
+@(learn) InverseParse $x {
+  @(if) ($x==00) { @(return) "A8" } @(if) ($x==01) { @(return) "B8" } @(if) ($x==02) { @(return) "C8" } @(if) ($x==03) { @(return) "D8" }
+  @(if) ($x==04) { @(return) "E8" } @(if) ($x==05) { @(return) "F8" } @(if) ($x==06) { @(return) "G8" } @(if) ($x==07) { @(return) "H8" }
+  @(if) ($x==08) { @(return) "A7" } @(if) ($x==09) { @(return) "B7" } @(if) ($x==10) { @(return) "C7" } @(if) ($x==11) { @(return) "D7" }
+  @(if) ($x==12) { @(return) "E7" } @(if) ($x==13) { @(return) "F7" } @(if) ($x==14) { @(return) "G7" } @(if) ($x==15) { @(return) "H7" }
+  @(if) ($x==16) { @(return) "A6" } @(if) ($x==17) { @(return) "B6" } @(if) ($x==18) { @(return) "C6" } @(if) ($x==19) { @(return) "D6" }
+  @(if) ($x==20) { @(return) "E6" } @(if) ($x==21) { @(return) "F6" } @(if) ($x==22) { @(return) "G6" } @(if) ($x==23) { @(return) "H6" }
+  @(if) ($x==24) { @(return) "A5" } @(if) ($x==25) { @(return) "B5" } @(if) ($x==26) { @(return) "C5" } @(if) ($x==27) { @(return) "D5" }
+  @(if) ($x==28) { @(return) "E5" } @(if) ($x==29) { @(return) "F5" } @(if) ($x==30) { @(return) "G5" } @(if) ($x==31) { @(return) "H5" }
+  @(if) ($x==32) { @(return) "A4" } @(if) ($x==33) { @(return) "B4" } @(if) ($x==34) { @(return) "C4" } @(if) ($x==35) { @(return) "D4" }
+  @(if) ($x==36) { @(return) "E4" } @(if) ($x==37) { @(return) "F4" } @(if) ($x==38) { @(return) "G4" } @(if) ($x==39) { @(return) "H4" }
+  @(if) ($x==40) { @(return) "A3" } @(if) ($x==41) { @(return) "B3" } @(if) ($x==42) { @(return) "C3" } @(if) ($x==43) { @(return) "D3" }
+  @(if) ($x==44) { @(return) "E3" } @(if) ($x==45) { @(return) "F3" } @(if) ($x==46) { @(return) "G3" } @(if) ($x==47) { @(return) "H3" }
+  @(if) ($x==48) { @(return) "A2" } @(if) ($x==49) { @(return) "B2" } @(if) ($x==50) { @(return) "C2" } @(if) ($x==51) { @(return) "D2" }
+  @(if) ($x==52) { @(return) "E2" } @(if) ($x==53) { @(return) "F2" } @(if) ($x==54) { @(return) "G2" } @(if) ($x==55) { @(return) "H2" }
+  @(if) ($x==56) { @(return) "A1" } @(if) ($x==57) { @(return) "B1" } @(if) ($x==58) { @(return) "C1" } @(if) ($x==59) { @(return) "D1" }
+  @(if) ($x==60) { @(return) "E1" } @(if) ($x==61) { @(return) "F1" } @(if) ($x==62) { @(return) "G1" } @(if) ($x==63) { @(return) "H1" }
+  @(return) ""
+}
+
+
+# Prompt the user for a tile - does value checking
+@(learn) AskTile $msg {
+  $tile = -1
+  @(while) $tile == -1 {
+    $tile = Parse (@(ask) $msg)
+    @(if) ( $tile == -1 ) { @(message) "Invalid tile (Make sure lowercase only)" }
+  }
+  @(return) $tile
+}
+
+# Vars
+$gridA1 = 0 $gridB1 = 0 $gridC1 = 0 $gridD1 = 0 $gridE1 = 1 $gridF1 = 0 $gridG1 = 0 $gridH1 = 0
+$gridA2 = 0 $gridB2 = 0 $gridC2 = 0 $gridD2 = 0 $gridE2 = 0 $gridF2 = 0 $gridG2 = 0 $gridH2 = 0
+$gridA3 = 0 $gridB3 = 0 $gridC3 = 0 $gridD3 = 0 $gridE3 = 0 $gridF3 = 0 $gridG3 = 0 $gridH3 = 0
+$gridA4 = 0 $gridB4 = 0 $gridC4 = 0 $gridD4 = 0 $gridE4 = 0 $gridF4 = 0 $gridG4 = 0 $gridH4 = 0
+$gridA5 = 0 $gridB5 = 0 $gridC5 = 0 $gridD5 = 0 $gridE5 = 0 $gridF5 = 0 $gridG5 = 0 $gridH5 = 0
+$gridA6 = 0 $gridB6 = 0 $gridC6 = 0 $gridD6 = 0 $gridE6 = 0 $gridF6 = 0 $gridG6 = 0 $gridH6 = 0
+$gridA7 = 0 $gridB7 = 0 $gridC7 = 0 $gridD7 = 0 $gridE7 = 0 $gridF7 = 0 $gridG7 = 0 $gridH7 = 0
+$gridA8 = 0 $gridB8 = 0 $gridC8 = 0 $gridD8 = 1 $gridE8 = 1 $gridF8 = 0 $gridG8 = 0 $gridH8 = 0
+$turn = @(false)
+$roundcount = 0
+
+$stile = 0 # Selected Tile (Space to move from)
+$ttile = 0 # Target Tile (Space to move from)
+$spiece = 0 # Selected Piece (PpNnBbRrQqKk)
+
+$last_old = -1 # Last turn old pos
+$last_new = -1 # Last turn new pos
+
+$black_lrook = @(false)
+$black_rrook = @(false)
+$white_lrook = @(false)
+$white_rrook = @(false)
+$white_king_moved = @(false)
+$black_king_moved = @(false)
+
+$castling = 0 # 0 = None; 1 = Queenside; 2 = Kingside
+
+@(learn) main {
+  @(reset) @(sh)
+
+  # Set Default Vars
+  $turn = @(false) # False = White; True = Black
+  $roundcount = 0
+
+  #Grid Values PpNnBbRrQqKk (Capital is white)
+  $gridA1 = 07 $gridB1 = 03 $gridC1 = 05 $gridD1 = 09 $gridE1 = 11 $gridF1 = 05 $gridG1 = 03 $gridH1 = 07
+  $gridA2 = 01 $gridB2 = 01 $gridC2 = 01 $gridD2 = 01 $gridE2 = 01 $gridF2 = 01 $gridG2 = 01 $gridH2 = 01
+  $gridA3 = 00 $gridB3 = 00 $gridC3 = 00 $gridD3 = 00 $gridE3 = 00 $gridF3 = 00 $gridG3 = 00 $gridH3 = 00
+  $gridA4 = 00 $gridB4 = 00 $gridC4 = 00 $gridD4 = 00 $gridE4 = 00 $gridF4 = 00 $gridG4 = 00 $gridH4 = 00
+  $gridA5 = 00 $gridB5 = 00 $gridC5 = 00 $gridD5 = 00 $gridE5 = 00 $gridF5 = 00 $gridG5 = 00 $gridH5 = 00
+  $gridA6 = 00 $gridB6 = 00 $gridC6 = 00 $gridD6 = 00 $gridE6 = 00 $gridF6 = 00 $gridG6 = 00 $gridH6 = 00
+  $gridA7 = 02 $gridB7 = 02 $gridC7 = 02 $gridD7 = 02 $gridE7 = 02 $gridF7 = 02 $gridG7 = 02 $gridH7 = 02
+  $gridA8 = 08 $gridB8 = 04 $gridC8 = 06 $gridD8 = 10 $gridE8 = 12 $gridF8 = 06 $gridG8 = 04 $gridH8 = 08
+
+  # File/Rank Markers
+  @(pc) 0@(,) 0@(,) 0
+  @(fontsize) 10
+  @(gox) -16
+  @(for) $i=0 @(to) 7 {
+    @(goy) $i*50 @(print) 8-$i
+  }
+  @(goy) 400
+  @(for) $i=0 @(to) 7 {
+    @(if) ($i==0) { $file="A" } @(else) @(if) ($i==1) { $file="B" } @(else) @(if) ($i==2) { $file="C" } @(else) @(if) ($i==3) { $file="D" }
+    @(else) @(if) ($i==4) { $file="E" } @(else) @(if) ($i==5) { $file="F" } @(else) @(if) ($i==6) { $file="G" } @(else) { $file="H" }
+    @(gox) $i*50
+    @(print) $file
+  }
+  @(for) $i=0 @(to) 63 { SetGrid $i@(,) (GetGrid $i) } # Draw the grid
+
+  # Start the grid
+  @(message) "White to play"
+
+  @(while) @(true) {
+    @(if) ($turn) { $turncolor=0 } @(else) { $turncolor=1 } # Set the turn color (bool to int)
+
+    # Get starting tile
+    $stile = -1
+    @(while) ((@(mod) (GetGrid $stile)@(,) 2)!=$turncolor) @(or) ($stile==-1) @(or) ((GetGrid $stile)==0) {
+      $stile = AskTile "Pick square to move from"
+    }
+    $spiece = GetGrid $stile
+
+    # Get target tile
+    $ttile = -1
+    @(while) @(not) LegalMove $spiece@(,) $stile@(,) $ttile {
+      $ttile = AskTile "Pick square to move to"
+    }
+    @(if) ($ttile != -2) @(and) ($stile != -2) {
+      $ptype = floordiv ($spiece-1)@(,) 2
+      @(if) ($ptype == 3) {
+        @(if) ($turn) {
+          @(if) ((@(not) $black_lrook) @(and) ($stile == 0)) { $black_lrook=@(true) }
+          @(if) ((@(not) $black_rrook) @(and) ($stile == 7)) { $black_rrook=@(true) }
+        } @(else) {
+          @(if) ((@(not) $white_lrook) @(and) ($stile == 56)) { $white_lrook=@(true) }
+          @(if) ((@(not) $white_rrook) @(and) ($stile == 63)) { $white_rrook=@(true) }
+        }
+      } @(else) @(if) ($ptype == 5) {
+        @(if) ($turn) { $black_king_moved=@(true) } @(else) { $white_king_moved=@(true) }
+      }
+      # Update the grid
+      SetGrid $stile@(,) 0
+      SetGrid $ttile@(,) $spiece
+
+      @(if) ( $castling > 0 ) {
+        @(if) ( $castling == 1 ) {
+          @(if) ( $turn ) { SetGrid 0@(,) 0 SetGrid 3@(,) 8 } @(else) { SetGrid 56@(,) 0 SetGrid 59@(,) 7  }
+        } @(else) @(if) ( $castling == 2 ) { 
+          @(if) ( $turn ) { SetGrid 7@(,) 0 SetGrid 5@(,) 8 } @(else) { SetGrid 63@(,) 0 SetGrid 61@(,) 7  }
+        } @(else) { @(message) "Illegal Castle" }
+
+        $castling = 0
+      }
+
+      @(if) ( (floordiv $spiece-1@(,) 2) == 0 ) @(and) ( ($turn @(and) $ttile >= 56) @(or) (@(not) $turn @(and) $ttile <= 7) ) {
+        # Pawn Promotion
+        $promote = 0
+        @(while) ( $promote == 0 ) {
+          $promote = @(ask) "Promote pawn to"
+          @(if) ( $promote == "knight" ) { $promote = 3 }
+          @(else) @(if) ( $promote == "bishop" ) { $promote = 5 }
+          @(else) @(if) ( $promote == "rook" ) { $promote = 7 }
+          @(else) @(if) ( $promote == "queen" ) { $promote = 9 }
+          @(else) { @(message) "Invalid piece. Type name of peice, all lowercase" $promote = 0 }
+        }
+      @(if) ( $turn ) { $promote = $promote + 1 }
+      SetGrid $ttile@(,) $promote
+      }
+
+      $turn = @(not) $turn
+      $last_old = $stile
+      $last_new = $ttile
+      @(if) ($turn) { @(message) "Black to play" } @(else) { @(message) "White to play" }
+    }
+  }
+}
+
+main
